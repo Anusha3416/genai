@@ -1,24 +1,24 @@
-from flask_cors import CORS
-from flask import Flask, request, jsonify   
-from langchain_google_genai import ChatGoogleGenerativeAI
-from dotenv import load_dotenv
-import os
+from flask_cors import CORS # first i imported the cors module to take care of the cross-origin requests
+from flask import Flask, request, jsonify   #i need to import flask too to handle requests and make an app if i want to 
+from langchain_google_genai import ChatGoogleGenerativeAI # this is where im importing the google generative AI module from langchain
+from dotenv import load_dotenv #this is to ensure security and load environment variables
+import os 
 
 
-# Load from .env if you're using it
-load_dotenv()
-os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 
+load_dotenv() # env variable
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY") # getting the google api key from the env variable
 
-# Create the LLM with Gemini
-llm = ChatGoogleGenerativeAI(
+# initialising the google generative ai model gemini 2.0 flash
+llm = ChatGoogleGenerativeAI( 
     model="gemini-2.0-flash", 
-     # Use "gemini-pro" for text
+    
     temperature=0.7
 )
-app = Flask(__name__)
-CORS(app)
-@app.route("/invoke", methods=["POST"])
+app = Flask(__name__) # create flask app
+CORS(app) #enabling cors for app
+@app.route("/invoke", methods=["POST"])#route to handle requests to the /invoke endpoint
+#handling the chat request
 def chat():
     data = request.json
     message = data.get("message", "")
@@ -28,4 +28,4 @@ def chat():
     return jsonify({"response": result.content})
 if __name__ == "__main__":
     app.run(debug=True)
-# Simple call
+#simple call

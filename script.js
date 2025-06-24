@@ -1,6 +1,10 @@
 const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 // asynchronous function to send user input and receive response
+document.getElementById("user-input").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") sendMessage();
+});
+
 async function sendMessage() {
   const message = userInput.value.trim();
   if (!message) return;

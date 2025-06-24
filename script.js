@@ -13,7 +13,7 @@ async function sendMessage() {
   userInput.value = "";
 
  // const response = await fetch("http://localhost:5000/chat", {
-  const response = await fetch("https://aura-backend-qkyj.onrender.com/invoke", {
+  const response = await fetch(" https://aura-backend-qkyj.onrender.com/invoke", {
 //isme not sure but url invoke hai
     method: "POST",
     headers: {
